@@ -1,13 +1,9 @@
-provider "aws" { 
-    access_key = "<access key>"  
-    secret_key = "‹secret key>"
-    region     = "us-east-1"
-}
-
+#provisioning ec2 instances
 variable "ec2-instance" {
     type = "string"
-    default = "i-081c7e6e454cbcdde"
+    default = "instance ID"
 
+#provisioning cloudwatch dashboard 
 resource "aws cloudwatch dashboard" "starter-dashboard" f
     dashboard_name = "dashboard-${var.ec2-instance}"
 
@@ -71,8 +67,9 @@ resource "aws cloudwatch dashboard" "starter-dashboard" f
 }
 EOF
 
+#provisioning a cloudWatch metrics alarm
 resource "aws_cloudwatch_metric_alarm" "ec2-cpu-80" {
-  alarm_name                = "terraform-test-ec2-cpu-80"
+  alarm_name                  = "terraform-test-ec2-cpu-80"
   comparison_operator         = "GreaterThanOrEqualToThreshold"
   evaluation_periods          = "2"
   metric_name                 = "CPUUtilization"
