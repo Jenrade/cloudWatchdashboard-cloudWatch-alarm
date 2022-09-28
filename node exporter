@@ -3,9 +3,17 @@ module "foundation_prometheus-node-exporter-sg" {
   source  = "fpco/foundation/aws//modules/prometheus-node-exporter-sg"
   version = "0.9.16"
 }
+
 # AWS EC2 Instance Type
 resource "aws_instance" "server" {
 type     = string
 for_each = toset( ["instanceID", "instanceID", "instanceID", "instanceID"] )
 name     = each.key
+}
+
+# AWS EC2 Instance Type
+variable "instance_type" {
+  description = "EC2 Instance Type"
+  type = string
+  default = "t3.micro"  
 }
